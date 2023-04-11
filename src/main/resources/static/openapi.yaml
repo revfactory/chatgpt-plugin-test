@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: KakaoMemo Plugin
+  description: A plugin that allows the user to create, search, and manage memos using ChatGPT.
+  version: 'v1'
+servers:
+  - url: http://localhost:8080
+paths:
+  /memos:
+    post:
+      operationId: createMemo
+      summary: Create a new memo
+      parameters:
+        - name: 'name'
+          required: true
+          description: name
+          in: query
+          schema:
+            type: string
+        - name: 'memo'
+          required: true
+          description: meno
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+    get:
+      operationId: getAllMemos
+      summary: Get all memos
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+  /memos/{name}:
+    get:
+      operationId: getMemoByName
+      summary: Get a memo by name
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the memo to search for
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+    delete:
+      operationId: deleteMemoByName
+      summary: Delete a memo by name
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the memo to delete
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
